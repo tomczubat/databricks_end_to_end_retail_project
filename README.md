@@ -1,5 +1,12 @@
 # databricks_end_to_end_retail_project
 
+
+Project Overview
+Spark Structured Streaming
+
+
+Project Components
+
 Project Components
 <img width="3420" height="973" alt="image" src="https://github.com/user-attachments/assets/9f17865b-0e68-483e-924c-f56c4788b99e" />
 
@@ -38,3 +45,8 @@ ingest the parquet file from the regions folder in the source container containe
 
 Preview the table that will be created and make sure to select the bronze schema.
 <img width="3432" height="1804" alt="image" src="https://github.com/user-attachments/assets/36c589ab-b286-425a-bed8-0beb2897f04d" />
+
+
+Create notebook to load data incrementally
+
+AUTOLOADER read and write stream
