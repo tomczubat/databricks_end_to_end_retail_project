@@ -55,4 +55,8 @@ Preview the table that will be created and make sure to select the bronze schema
 Create notebook to load data incrementally
 
 AUTOLOADER read and write stream
+.trigger(once=True) = run one micro‑batch, process everything available, then stop.
+
+<img width="1982" height="623" alt="image" src="https://github.com/user-attachments/assets/5654a476-1081-4f72-838a-d6535b3854cc" />
+
 <img width="2622" height="1157" alt="image" src="https://github.com/user-attachments/assets/7c18ca80-994b-410f-a757-5c8c4bb0f608" />
