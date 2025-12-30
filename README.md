@@ -44,7 +44,12 @@ ingest the parquet file from the regions folder in the source container containe
 <img width="3422" height="1828" alt="image" src="https://github.com/user-attachments/assets/9e8181e2-1268-4310-87fa-cb27f858b55e" />
 
 Preview the table that will be created and make sure to select the bronze schema.
+
+.trigger(once=True) = run one micro‑batch, process everything available, then stop.
+
 <img width="3432" height="1804" alt="image" src="https://github.com/user-attachments/assets/36c589ab-b286-425a-bed8-0beb2897f04d" />
+
+
 
 
 Create notebook to load data incrementally
