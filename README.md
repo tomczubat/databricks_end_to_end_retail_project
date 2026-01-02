@@ -60,3 +60,22 @@ AUTOLOADER read and write stream
 <img width="1982" height="623" alt="image" src="https://github.com/user-attachments/assets/5654a476-1081-4f72-838a-d6535b3854cc" />
 
 <img width="2622" height="1157" alt="image" src="https://github.com/user-attachments/assets/7c18ca80-994b-410f-a757-5c8c4bb0f608" />
+
+
+Make the notebook dynamic
+oarameterize the notebook with loops
+param can be changed at runtime
+
+create the parameters notebook
+
+<img width="2429" height="837" alt="image" src="https://github.com/user-attachments/assets/327aec48-73fd-41b3-af2b-c79fe31921d3" />
+
+create teh task
+<img width="2891" height="1490" alt="image" src="https://github.com/user-attachments/assets/fa35cc30-2a4c-432d-8d2d-c9ff9655ad42" />
+
+enable the loop so the file_name array can be looped over
+<img width="1550" height="905" alt="image" src="https://github.com/user-attachments/assets/a3a0cce9-8b00-414c-b882-146735324f1b" />
+
+
+<img width="1685" height="587" alt="image" src="https://github.com/user-attachments/assets/a87b4c6a-77af-4f4d-bc25-57d34a8cde3a" />
+
