@@ -79,3 +79,21 @@ enable the loop so the file_name array can be looped over
 
 <img width="1685" height="587" alt="image" src="https://github.com/user-attachments/assets/a87b4c6a-77af-4f4d-bc25-57d34a8cde3a" />
 
+---------------------------------------
+Test teh incremental loan for the products file
+first files has 490 rows and second has 10. This is to ensure processing is happening only once and if a new file is added to the container, it will be processed.
+
+Part 1 - products in the bronze container after being processede
+<img width="2469" height="499" alt="image" src="https://github.com/user-attachments/assets/8f17144a-8296-4907-81c3-f6443feb6374" />
+
+<img width="2009" height="592" alt="image" src="https://github.com/user-attachments/assets/cdc2a1fa-7ede-49f0-8e7d-0b00c4e7ca17" />
+
+Part 2 - Add the second part of the products data into the ADLS source container
+<img width="2022" height="735" alt="image" src="https://github.com/user-attachments/assets/9603276c-eb66-4394-ba0c-7d71f99304f6" />
+
+Run the job again then check the count in the bronze container
+<img width="2472" height="518" alt="image" src="https://github.com/user-attachments/assets/f0489828-dbe4-4313-af8d-d8e4bddf32a9" />
+
+
+----------------------------------------------
+customers
