@@ -57,10 +57,32 @@ Create notebook to load data incrementally
 AUTOLOADER read and write stream
 .trigger(once=True) = run one micro‑batch, process everything available, then stop.
 
-<img width="1982" height="623" alt="image" src="https://github.com/user-attachments/assets/5654a476-1081-4f72-838a-d6535b3854cc" />
+read and write the first customers parquet file from the source container to the bronzse container
+<img width="2020" height="700" alt="image" src="https://github.com/user-attachments/assets/6e8ae982-70a9-40e7-909f-8b0fe886cbce" />
 
-<img width="2622" height="1157" alt="image" src="https://github.com/user-attachments/assets/7c18ca80-994b-410f-a757-5c8c4bb0f608" />
 
+<img width="2596" height="731" alt="image" src="https://github.com/user-attachments/assets/99054100-6eb5-48d7-90b0-f6790a9578fd" />
+
+
+<img width="2551" height="578" alt="image" src="https://github.com/user-attachments/assets/b29ace01-85b4-4ad1-999a-d1473a630edf" />
+
+Check the record count of cumsters i nthe bronze container
+
+
+<img width="2579" height="528" alt="image" src="https://github.com/user-attachments/assets/7f497e57-d51b-4df0-bdfe-dbb3e014786b" />
+
+
+
+Add the second parquet files to the customers folder ion tyhe source container(This file containes 10 rows)
+
+
+<img width="1957" height="714" alt="image" src="https://github.com/user-attachments/assets/64bd8165-9373-4b28-957e-5dbeb0ee715b" />
+
+Run the notebook again and check how many records are on the customer folder of the bronze container, TR
+
+<img width="2549" height="486" alt="image" src="https://github.com/user-attachments/assets/0db898fb-e7b3-433d-ab5d-12980e9aaa92" />
+
+We now see that the 10 additional customer rows have been ingested into the bronze layer. This means our incremental load is working as indented as only new files were processed.
 
 Make the notebook dynamic
 oarameterize the notebook with loops
@@ -79,14 +101,13 @@ enable the loop so the file_name array can be looped over
 
 <img width="1685" height="587" alt="image" src="https://github.com/user-attachments/assets/a87b4c6a-77af-4f4d-bc25-57d34a8cde3a" />
 
----------------------------------------
+
+customers
 Test teh incremental loan for the products file
 first files has 490 rows and second has 10. This is to ensure processing is happening only once and if a new file is added to the container, it will be processed.
 
 Part 1 - products in the bronze container after being processede
-<img width="2469" height="499" alt="image" src="https://github.com/user-attachments/assets/8f17144a-8296-4907-81c3-f6443feb6374" />
-
-<img width="2009" height="592" alt="image" src="https://github.com/user-attachments/assets/cdc2a1fa-7ede-49f0-8e7d-0b00c4e7ca17" />
+<img width="2506" height="534" alt="image" src="https://github.com/user-attachments/assets/ba33fafd-0602-442c-a575-4e27fe1add1c" />
 
 Part 2 - Add the second part of the products data into the ADLS source container
 <img width="2022" height="735" alt="image" src="https://github.com/user-attachments/assets/9603276c-eb66-4394-ba0c-7d71f99304f6" />
@@ -94,6 +115,3 @@ Part 2 - Add the second part of the products data into the ADLS source container
 Run the job again then check the count in the bronze container
 <img width="2472" height="518" alt="image" src="https://github.com/user-attachments/assets/f0489828-dbe4-4313-af8d-d8e4bddf32a9" />
 
-
-----------------------------------------------
-customers
