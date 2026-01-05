@@ -58,7 +58,25 @@ AUTOLOADER read and write stream
 .trigger(once=True) = run one micro‑batch, process everything available, then stop.
 
 read and write the first customers parquet file from the source container to the bronzse container
-<img width="2020" height="700" alt="image" src="https://github.com/user-attachments/assets/6e8ae982-70a9-40e7-909f-8b0fe886cbce" />
+
+
+```python
+df =  spark.readStream.format("cloudFiles") \
+        .option("cloudFiles.format", "parquet") \
+        .option("cloudFiles.schemaLocation", f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/checkpoint_cuastomers") \
+        .load(f"abfss://source@adlsdatabricksprojectcz.dfs.core.windows.net/customers") \
+```
+
+```python
+df.writeStream \
+    .format("parquet")  \
+    .outputMode("append") \
+    .option("checkpointLocation", f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/checkpoint_customers") \
+    .trigger(once=True) \
+    .start(f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/customers")
+
+```
+
 
 
 <img width="2596" height="731" alt="image" src="https://github.com/user-attachments/assets/99054100-6eb5-48d7-90b0-f6790a9578fd" />
@@ -115,3 +133,10 @@ Part 2 - Add the second part of the products data into the ADLS source container
 Run the job again then check the count in the bronze container
 <img width="2472" height="518" alt="image" src="https://github.com/user-attachments/assets/f0489828-dbe4-4313-af8d-d8e4bddf32a9" />
 
+
+
+```python
+df = spark.read.format("parquet").load("abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/customers")
+
+df.count()
+```
