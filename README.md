@@ -63,7 +63,7 @@ read and write the first customers parquet file from the source container to the
 ```python
 df =  spark.readStream.format("cloudFiles") \
         .option("cloudFiles.format", "parquet") \
-        .option("cloudFiles.schemaLocation", f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/checkpoint_cuastomers") \
+        .option("cloudFiles.schemaLocation", f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/checkpoint_customers") \
         .load(f"abfss://source@adlsdatabricksprojectcz.dfs.core.windows.net/customers") \
 ```
 
@@ -77,12 +77,11 @@ df.writeStream \
 
 ```
 
+The ".trigger(once=True)" will ensure that data is onoly processed once from the source container. The stream will also stop once the data is written to the bronzse lauer.
 
 
-<img width="2596" height="731" alt="image" src="https://github.com/user-attachments/assets/99054100-6eb5-48d7-90b0-f6790a9578fd" />
 
 
-<img width="2551" height="578" alt="image" src="https://github.com/user-attachments/assets/b29ace01-85b4-4ad1-999a-d1473a630edf" />
 
 Check the record count of cumsters i nthe bronze container
 
@@ -102,7 +101,9 @@ Run the notebook again and check how many records are on the customer folder of 
 
 We now see that the 10 additional customer rows have been ingested into the bronze layer. This means our incremental load is working as indented as only new files were processed.
 
-Make the notebook dynamic
+
+
+## Make the notebook dynamic 
 oarameterize the notebook with loops
 param can be changed at runtime
 
@@ -121,7 +122,7 @@ enable the loop so the file_name array can be looped over
 
 
 customers
-Test teh incremental loan for the products file
+Test the incremental loan for the products file
 first files has 490 rows and second has 10. This is to ensure processing is happening only once and if a new file is added to the container, it will be processed.
 
 Part 1 - products in the bronze container after being processede
