@@ -127,7 +127,33 @@ source_folders = [
 dbutils.jobs.taskValues.set("source_folders", source_folders)
 ```
 
+### create a job and add a the parameters notebook as a task
+<img width="2860" height="987" alt="image" src="https://github.com/user-attachments/assets/181c297f-ee25-4995-a711-050ca372fc56" />
+
+### Create a bronze_autoloader task that runs the bronze_layer notebook. This task is dependent on receiving the paramters info from the paramters notebook
+
+<img width="1603" height="1026" alt="image" src="https://github.com/user-attachments/assets/4073bfc2-41b5-4d86-a605-a6d45ef31ce6" />
+
+Add the source_folder array  and create the task
+<img width="1623" height="345" alt="image" src="https://github.com/user-attachments/assets/8f401ab2-ce9a-4f9d-a3a9-b2fadb3f244d" />
+
+We will need to enable looping over the task
+<img width="669" height="504" alt="image" src="https://github.com/user-attachments/assets/d87970e3-ac73-4d9e-b403-f53289580302" />
 
 
 
+
+<img width="1508" height="405" alt="image" src="https://github.com/user-attachments/assets/83d07349-63d6-4b22-ab4d-6e68b16ea59d" />
+
+
+Set the For each look with a dynamic input of the parameter output name
+<img width="1523" height="618" alt="image" src="https://github.com/user-attachments/assets/235afdad-18a0-4f2c-87e4-15e4519576e8" />
+
+
+Set the value of the key in the bronze_autoloader to the name of the dictionary
+<img width="1545" height="333" alt="image" src="https://github.com/user-attachments/assets/1c217874-45b7-47ab-9ba4-62e160e0f2cb" />
+
+
+### The job for bronze_incremental is now ready to be tested
+<img width="1702" height="796" alt="image" src="https://github.com/user-attachments/assets/e549b118-b93b-4190-8465-a898b00bfd42" />
 
