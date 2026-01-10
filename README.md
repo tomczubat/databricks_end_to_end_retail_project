@@ -107,37 +107,27 @@ We now see that the 10 additional customer rows have been ingested into the bron
 oarameterize the notebook with loops
 param can be changed at runtime
 
-create the parameters notebook
-
-<img width="2429" height="837" alt="image" src="https://github.com/user-attachments/assets/327aec48-73fd-41b3-af2b-c79fe31921d3" />
-
-create teh task
-<img width="2891" height="1490" alt="image" src="https://github.com/user-attachments/assets/fa35cc30-2a4c-432d-8d2d-c9ff9655ad42" />
-
-enable the loop so the file_name array can be looped over
-<img width="1550" height="905" alt="image" src="https://github.com/user-attachments/assets/a3a0cce9-8b00-414c-b882-146735324f1b" />
-
-
-<img width="1685" height="587" alt="image" src="https://github.com/user-attachments/assets/a87b4c6a-77af-4f4d-bc25-57d34a8cde3a" />
-
-
-customers
-Test the incremental loan for the products file
-first files has 490 rows and second has 10. This is to ensure processing is happening only once and if a new file is added to the container, it will be processed.
-
-Part 1 - products in the bronze container after being processede
-<img width="2506" height="534" alt="image" src="https://github.com/user-attachments/assets/ba33fafd-0602-442c-a575-4e27fe1add1c" />
-
-Part 2 - Add the second part of the products data into the ADLS source container
-<img width="2022" height="735" alt="image" src="https://github.com/user-attachments/assets/9603276c-eb66-4394-ba0c-7d71f99304f6" />
-
-Run the job again then check the count in the bronze container
-<img width="2472" height="518" alt="image" src="https://github.com/user-attachments/assets/f0489828-dbe4-4313-af8d-d8e4bddf32a9" />
-
-
+### create the parameters notebook
+The array of dictionaries will store the folder names from the source container
 
 ```python
-df = spark.read.format("parquet").load("abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/customers")
+# Define an array of dictionaries to store the folder names
 
-df.count()
+source_folders = [
+  {"folder_name": "orders"},
+  {"folder_name": "customers"},
+  {"folder_name": "products"},
+  {"name": "silver"}
+]
 ```
+
+### Create a  Databricks Job Task Values Store that will be able to be used in other taks in our job
+
+```python
+dbutils.jobs.taskValues.set("source_folders", source_folders)
+```
+
+
+
+
+
