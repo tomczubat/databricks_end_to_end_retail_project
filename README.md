@@ -93,7 +93,7 @@ Check the record count of cumsters i nthe bronze container
 Add the second parquet files to the customers folder ion tyhe source container(This file containes 10 rows)
 
 
-<img width="1957" height="714" alt="image" src="https://github.com/user-attachments/assets/64bd8165-9373-4b28-957e-5dbeb0ee715b" />
+<img width="1967" height="681" alt="image" src="https://github.com/user-attachments/assets/552298aa-0b66-4f25-ab81-3df835f3bdc5" />
 
 Run the notebook again and check how many records are on the customer folder of the bronze container, TR
 
@@ -113,18 +113,17 @@ The array of dictionaries will store the folder names from the source container
 ```python
 # Define an array of dictionaries to store the folder names
 
-source_folders = [
+datasets = [
   {"folder_name": "orders"},
   {"folder_name": "customers"},
   {"folder_name": "products"},
-  {"name": "silver"}
 ]
 ```
 
 ### Create a  Databricks Job Task Values Store that will be able to be used in other taks in our job
 
 ```python
-dbutils.jobs.taskValues.set("source_folders", source_folders)
+folder_name = dbutils.widgets.get("folder_name")
 ```
 
 ### create a job and add a the parameters notebook as a task
@@ -137,23 +136,31 @@ dbutils.jobs.taskValues.set("source_folders", source_folders)
 Add the source_folder array  and create the task
 <img width="1623" height="345" alt="image" src="https://github.com/user-attachments/assets/8f401ab2-ce9a-4f9d-a3a9-b2fadb3f244d" />
 
-We will need to enable looping over the task
+Enable looping over the task
 <img width="669" height="504" alt="image" src="https://github.com/user-attachments/assets/d87970e3-ac73-4d9e-b403-f53289580302" />
 
 
 
 
-<img width="1508" height="405" alt="image" src="https://github.com/user-attachments/assets/83d07349-63d6-4b22-ab4d-6e68b16ea59d" />
 
 
-Set the For each look with a dynamic input of the parameter output name
-<img width="1523" height="618" alt="image" src="https://github.com/user-attachments/assets/235afdad-18a0-4f2c-87e4-15e4519576e8" />
+Set the For each loop with a dynamic input of the parameter output name
+
+<img width="1573" height="550" alt="image" src="https://github.com/user-attachments/assets/1b871988-a89a-466e-ac7c-3f5b71ddcb47" />
 
 
-Set the value of the key in the bronze_autoloader to the name of the dictionary
-<img width="1545" height="333" alt="image" src="https://github.com/user-attachments/assets/1c217874-45b7-47ab-9ba4-62e160e0f2cb" />
+
+
+SSet the value of the key in the bronze_autoloader to the name of the dictionary
+
+<img width="1407" height="188" alt="image" src="https://github.com/user-attachments/assets/48a5df74-d088-4ce1-89ee-e92362820c98" />
+
 
 
 ### The job for bronze_incremental is now ready to be tested
 <img width="1702" height="796" alt="image" src="https://github.com/user-attachments/assets/e549b118-b93b-4190-8465-a898b00bfd42" />
+
+The first run was successful
+<img width="1554" height="185" alt="image" src="https://github.com/user-attachments/assets/6ef28c5c-b29b-43af-9578-726b58b5f49f" />
+
 
