@@ -63,17 +63,20 @@ read and write the first customers parquet file from the source container to the
 ```python
 df =  spark.readStream.format("cloudFiles") \
         .option("cloudFiles.format", "parquet") \
-        .option("cloudFiles.schemaLocation", f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/checkpoint_customers") \
-        .load(f"abfss://source@adlsdatabricksprojectcz.dfs.core.windows.net/customers") \
+        .option("cloudFiles.schemaLocation", f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/checkpoint_{folder_name}") \
+        .load(f"abfss://source@adlsdatabricksprojectcz.dfs.core.windows.net/{folder_name}") 
+    
+
 ```
 
 ```python
 df.writeStream \
     .format("parquet")  \
     .outputMode("append") \
-    .option("checkpointLocation", f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/checkpoint_customers") \
+    .option("checkpointLocation", f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/checkpoint_{folder_name}") \
     .trigger(once=True) \
-    .start(f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/customers")
+    .start(f"abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/{folder_name}")
+
 
 ```
 
@@ -163,4 +166,18 @@ SSet the value of the key in the bronze_autoloader to the name of the dictionary
 The first run was successful
 <img width="1554" height="185" alt="image" src="https://github.com/user-attachments/assets/6ef28c5c-b29b-43af-9578-726b58b5f49f" />
 
+### Check the row count in the bronze container for all three folders
+<img width="2703" height="1238" alt="image" src="https://github.com/user-attachments/assets/3889612f-0a5a-479a-8a37-21c2fc29b74e" />
+
+### Add the part 2 parquet file for each folder inteh source container
+
+<img width="1769" height="717" alt="image" src="https://github.com/user-attachments/assets/9a2c264b-e780-48d7-8dbe-38b60aeed79a" />
+<img width="1582" height="708" alt="image" src="https://github.com/user-attachments/assets/ba2ee5f9-1345-4b8c-82bc-d290bc948057" />
+<img width="1591" height="744" alt="image" src="https://github.com/user-attachments/assets/2e4ec460-d2e0-4185-9564-f5b268d65ed7" />
+
+###Run the bronze autoloader again. This should ingest only tyhe part 2 file from each folder
+<img width="2900" height="1177" alt="image" src="https://github.com/user-attachments/assets/f6c968d1-3bca-4695-bd4c-498dc4205852" />
+
+### Check thge row count in the bronze container to ensure only the new parquet files were added
+<img width="2720" height="1578" alt="image" src="https://github.com/user-attachments/assets/58e79367-4bfb-4a63-9606-ba2408620871" />
 
