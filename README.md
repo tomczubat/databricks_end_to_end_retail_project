@@ -181,3 +181,4 @@ The first run was successful
 ### Check thge row count in the bronze container to ensure only the new parquet files were added
 <img width="2720" height="1578" alt="image" src="https://github.com/user-attachments/assets/58e79367-4bfb-4a63-9606-ba2408620871" />
 
+#Silver layer
