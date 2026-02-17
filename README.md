@@ -182,3 +182,35 @@ The first run was successful
 <img width="2720" height="1578" alt="image" src="https://github.com/user-attachments/assets/58e79367-4bfb-4a63-9606-ba2408620871" />
 
 ## Silver layer
+### The purpose of the silver layer is to ingest data from the bronze layer, perfrorm aggregation, and move the data to the gold layer.
+
+@## Create a new notebook for the orders data and attached a compute cluster
+Import out neccesary libraries and import the order data from the bronze container into our data frame
+
+```python
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+```
+
+```python
+df = spark.read.format("parquet") \
+    .load("abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/orders")
+```
+
+### Drop the _rescued_date column which will not be used
+```python
+df = df.drop('_rescued_data')
+```
+
+Current dataframe
+<img width="2456" height="823" alt="image" src="https://github.com/user-attachments/assets/7cfafee7-0fbe-4aba-bacc-4369210f6ecd" />
+
+### Add a year column based on the order_date column
+```python
+df = df.withColumn("year", year(col("order_date")))
+```
+
+df with additional year column
+<img width="2304" height="751" alt="image" src="https://github.com/user-attachments/assets/81d8e3ad-3f19-45dc-a259-4e7e3bef0ec5" />
+
