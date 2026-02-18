@@ -212,5 +212,36 @@ df = df.withColumn("year", year(col("order_date")))
 ```
 
 df with additional year column
-<img width="2304" height="751" alt="image" src="https://github.com/user-attachments/assets/81d8e3ad-3f19-45dc-a259-4e7e3bef0ec5" />
+<img width="3448" height="1101" alt="image" src="https://github.com/user-attachments/assets/dd28b708-7eb7-411c-8159-0f22e9ccef1f" />
+
+## Creating a class with window functions to make our code more reusable
+```python
+class WindowFunction():
+
+    def dense_rank(self, df):
+        df_dense_rank =  df.withColumn("flag", dense_rank().over(Window.partitionBy("year").orderBy(desc("total_amount"))))
+        return df_dense_rank
+    
+    def rank(self, df):
+        df_rank = df.withColumn("flag", dense_rank().over(Window.partitionBy("year").orderBy(desc("total_amount"))))
+        return df_rank
+    
+    def row_number(self, df):
+        df_row_number = df.withColumn("flag", dense_rank().over(Window.partitionBy("year").orderBy(desc("total_amount"))))
+        return df_row_number
+    
+```
+
+### Create an open from the FunctionFunction Class
+```python
+obj = WindowFunction()
+```
+
+### Call dense rank function while passing in our original dataframe and assign this to a new dataframe
+```python
+df_result = obj.dense_rank(df)
+```
+
+### Check the new dataframe to ensure our dense_rank flag was added
+<img width="2450" height="851" alt="image" src="https://github.com/user-attachments/assets/2c2eb4d0-31aa-455c-85ea-f4b594636b26" />
 
