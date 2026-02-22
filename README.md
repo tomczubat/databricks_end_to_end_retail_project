@@ -245,3 +245,20 @@ df_result = obj.dense_rank(df)
 ### Check the new dataframe to ensure our dense_rank flag was added
 <img width="2450" height="851" alt="image" src="https://github.com/user-attachments/assets/2c2eb4d0-31aa-455c-85ea-f4b594636b26" />
 
+###Write teh order data to the silver layer
+
+```python
+df_result.write \
+  .format("delta") \
+  .mode("overwrite") \
+  .save("abfss://silver@adlsdatabricksprojectcz.dfs.core.windows.net/orders")
+```
+
+### check the silver container to confirm the data was moved
+
+
+<img width="2019" height="556" alt="image" src="https://github.com/user-attachments/assets/3588866d-54a1-48a7-8554-7b5f48af2ffd" />
+
+
+<img width="2034" height="873" alt="image" src="https://github.com/user-attachments/assets/4f6cb986-bf82-4974-9935-a7a8e3927c25" />
+
