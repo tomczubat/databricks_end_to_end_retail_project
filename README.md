@@ -264,3 +264,10 @@ df = df.drop("_rescued_data")
 Check the dataframe to make usre vberything looks correct.
 <img width="2423" height="1107" alt="image" src="https://github.com/user-attachments/assets/75882c48-b184-419d-9ede-ae8c742d37bb" />
 
+Separate the domain section of the customers email into a new column. This will take everything after the @ symbol and place it in a new column
+```python
+df = df.withColumn("domains", split(col('email'), '@')[1])
+df.display()
+
+```
+
