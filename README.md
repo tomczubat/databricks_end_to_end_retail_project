@@ -214,36 +214,18 @@ df = df.withColumn("year", year(col("order_date")))
 df with additional year column
 <img width="3448" height="1101" alt="image" src="https://github.com/user-attachments/assets/dd28b708-7eb7-411c-8159-0f22e9ccef1f" />
 
-## Creating a class with window functions to make our code more reusable
-```python
-class WindowFunction():
 
-    def dense_rank(self, df):
-        df_dense_rank =  df.withColumn("flag", dense_rank().over(Window.partitionBy("year").orderBy(desc("total_amount"))))
-        return df_dense_rank
-    
-    def rank(self, df):
-        df_rank = df.withColumn("flag", dense_rank().over(Window.partitionBy("year").orderBy(desc("total_amount"))))
-        return df_rank
-    
-    def row_number(self, df):
-        df_row_number = df.withColumn("flag", dense_rank().over(Window.partitionBy("year").orderBy(desc("total_amount"))))
-        return df_row_number
-    
-```
 
 ### Create an open from the FunctionFunction Class
 ```python
 obj = WindowFunction()
 ```
 
-### Call dense rank function while passing in our original dataframe and assign this to a new dataframe
+### Apply the dense rank window fcuntion to the dataframe. This will allow us to see the highest order partitioned by the year. The dense rank function will treat ties as having the same rank and the next rank will be incremented by 1.
 ```python
-df_result = obj.dense_rank(df)
+df = df.withColumn("rank", dense_rank().over(Window.partitionBy("year").orderBy(desc("total_amount"))))
 ```
 
-### Check the new dataframe to ensure our dense_rank flag was added
-<img width="2450" height="851" alt="image" src="https://github.com/user-attachments/assets/2c2eb4d0-31aa-455c-85ea-f4b594636b26" />
 
 ###Write teh order data to the silver layer
 
@@ -261,4 +243,24 @@ df_result.write \
 
 
 <img width="2034" height="873" alt="image" src="https://github.com/user-attachments/assets/4f6cb986-bf82-4974-9935-a7a8e3927c25" />
+
+## Customer Data
+
+Import the deccessary libraries
+```oython
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+``
+Pull the data from the bronze layer into our dataframe
+```python
+df = spark.read.format("parquet") \
+.load("abfss://bronze@adlsdatabricksprojectcz.dfs.core.windows.net/customers")
+```
+
+Drop the rescued data column
+```python
+df = df.drop("_rescued_data")
+```
+Check the dataframe to make usre vberything looks correct.
+<img width="2423" height="1107" alt="image" src="https://github.com/user-attachments/assets/75882c48-b184-419d-9ede-ae8c742d37bb" />
 
