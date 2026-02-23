@@ -268,6 +268,7 @@ Separate the domain section of the customers email into a new column. This will 
 ```python
 df = df.withColumn("domains", split(col('email'), '@')[1])
 df.display()
-
 ```
+
+<img width="2476" height="1146" alt="image" src="https://github.com/user-attachments/assets/d805d4f0-f9eb-4eed-abaa-b2a43fbcd6af" />
 
